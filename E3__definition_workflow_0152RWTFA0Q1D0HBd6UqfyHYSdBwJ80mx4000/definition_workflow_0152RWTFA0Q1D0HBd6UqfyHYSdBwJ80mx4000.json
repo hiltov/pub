@@ -1,0 +1,1402 @@
+{
+	"workflow": {
+		"unique_name": "definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74",
+		"name": "Phase 1 Device Discovery1",
+		"title": "Phase 1 Device Discovery1",
+		"type": "generic.workflow",
+		"base_type": "workflow",
+		"variables": [{
+			"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+			"properties": {
+				"value": "650207196201615741",
+				"scope": "input",
+				"name": "Input.OrganizationId",
+				"type": "datatype.string"
+			},
+			"unique_name": "variable_workflow_1CzuzoTrQTmfu3VwdeHICzQNTUB",
+			"object_type": ""
+		}, {
+			"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+			"properties": {
+				"value": "",
+				"scope": "local",
+				"name": "BogusPlaceholder",
+				"type": "datatype.string",
+				"description": "Added so I would have a bogus activity to generate a date/time from for later Format Date activity"
+			},
+			"unique_name": "variable_workflow_1Czuzmbf4opqXEL0kjYIT4vy1l7",
+			"object_type": ""
+		}, {
+			"schema_id": "1BhhrGuEw3FyD0gTpPgmbQzPmys",
+			"properties": {
+				"value": false,
+				"scope": "local",
+				"name": "Skip",
+				"type": "datatype.boolean"
+			},
+			"unique_name": "variable_workflow_1CzuzoNxOidguqivXlMTi6EAT5y",
+			"object_type": ""
+		}, {
+			"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+			"properties": {
+				"value": "",
+				"scope": "local",
+				"name": "retrievedmac",
+				"type": "datatype.string"
+			},
+			"unique_name": "variable_workflow_1CzuzjvDMqW0rQQhwWkC6yzZa7z",
+			"object_type": ""
+		}, {
+			"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+			"properties": {
+				"value": "",
+				"scope": "local",
+				"name": "Empty String",
+				"type": "datatype.string"
+			},
+			"unique_name": "variable_workflow_1CzuzjKhXipTEBkZwcnbluG1Inl",
+			"object_type": ""
+		}],
+		"properties": {
+			"delete_workflow_instance": false,
+			"display_name": "Phase 1 Device Discovery1",
+			"target": {
+				"no_target": true
+			}
+		},
+		"object_type": "definition_workflow",
+		"actions": [{
+			"unique_name": "definition_activity_1BwQiV3O38E6MYBeA8FKn3H1Z3g",
+			"name": "Set Variables",
+			"title": "Set Variables1",
+			"type": "core.set_multiple_variables",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "Set Variables1",
+				"variables_to_update": [{
+					"variable_to_update": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1Czuzmbf4opqXEL0kjYIT4vy1l7$",
+					"variable_value_new": " "
+				}]
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwQXzd6YBCAZvbJNswIKX0mPNJ",
+			"name": "Format Date",
+			"title": "Format Date",
+			"type": "core.format_date",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "Format Date",
+				"format_string": "2006-01-02T15:04:05Z",
+				"original_date": "$activity.definition_activity_1BwQiV3O38E6MYBeA8FKn3H1Z3g.output.start_time$"
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwQxjulQQ9G5DZxNDD73f5h1AV",
+			"name": "Replace String",
+			"title": "Replace String",
+			"type": "core.replacestring",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "Replace String",
+				"input_string": "$activity.definition_activity_1BwQXzd6YBCAZvbJNswIKX0mPNJ.output.result$",
+				"replace_list": [{
+					"replaced_string": "-",
+					"replacement_string": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzjKhXipTEBkZwcnbluG1Inl$"
+				}, {
+					"replaced_string": "T",
+					"replacement_string": "-"
+				}, {
+					"replaced_string": "Z",
+					"replacement_string": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzjKhXipTEBkZwcnbluG1Inl$"
+				}, {
+					"replaced_string": ":",
+					"replacement_string": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzjKhXipTEBkZwcnbluG1Inl$"
+				}]
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwO6fI97f5gFNB5nK7HUBtpAhc",
+			"name": "Meraki - Get Networks",
+			"title": "Meraki - Get Networks",
+			"type": "workflow.sub_workflow",
+			"base_type": "subworkflow",
+			"properties": {
+				"display_name": "Meraki - Get Networks",
+				"input": {
+					"variable_workflow_1Czv2cuuWFPPwLqowLYy8IrVdoa": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.input.variable_workflow_1CzuzoTrQTmfu3VwdeHICzQNTUB$"
+				},
+				"target": {
+					"no_target": true
+				},
+				"workflow_id": "definition_workflow_1BwFlnSzMFVtiHTUgln9CAunCU1"
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwOgMi2nYX91IEapkmbciXC5EW",
+			"name": "Write File",
+			"title": "Write File (Networks)",
+			"type": "terminal.write_file",
+			"base_type": "activity",
+			"properties": {
+				"action_timeout": 180,
+				"content": "$activity.definition_activity_1BwO6fI97f5gFNB5nK7HUBtpAhc.output.variable_workflow_1Czv2ekPseDCb0GzoPTWcYj6eBX$",
+				"display_name": "Write File (Networks)",
+				"encoding": "utf-8",
+				"file_name": "LabCorp/LC-networks-$activity.definition_activity_1BwQxjulQQ9G5DZxNDD73f5h1AV.output.result_string$.json",
+				"options": "overwrite",
+				"runtime_user": {
+					"target_default": true
+				},
+				"target": {
+					"override_workflow_target": true,
+					"target_id": "definition_target_1BinkgRP0dVHaMOc59eqceuY3e8"
+				}
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwTzVLB0hVGFp3LqLJDrgtomPr",
+			"name": "Read Table from JSON",
+			"title": "Read Table from JSON (Networks)",
+			"type": "corejava.read_table_from_json",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "Read Table from JSON (Networks)",
+				"input_json": "{ \"networks\" :\n$activity.definition_activity_1BwO6fI97f5gFNB5nK7HUBtpAhc.output.variable_workflow_1Czv2ekPseDCb0GzoPTWcYj6eBX$\n}",
+				"jsonpath_query": "$.networks[*]",
+				"populate_columns": false,
+				"table_columns": [{
+					"column_name": "id",
+					"column_type": "string"
+				}, {
+					"column_name": "organizationId",
+					"column_type": "string"
+				}, {
+					"column_name": "name",
+					"column_type": "string"
+				}, {
+					"column_name": "timeZone",
+					"column_type": "string"
+				}, {
+					"column_name": "tags",
+					"column_type": "string"
+				}, {
+					"column_name": "type",
+					"column_type": "string"
+				}]
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwT1T8RjrLrEo6vH9AYGfTxUb8",
+			"name": "Meraki - Get Inventory",
+			"title": "Meraki - Get Inventory",
+			"type": "workflow.sub_workflow",
+			"base_type": "subworkflow",
+			"properties": {
+				"display_name": "Meraki - Get Inventory",
+				"input": {
+					"variable_workflow_1Czv3Cq7XS6VQCWCEx4vvXsgz59": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.input.variable_workflow_1CzuzoTrQTmfu3VwdeHICzQNTUB$"
+				},
+				"target": {
+					"no_target": true
+				},
+				"workflow_id": "definition_workflow_1BwGerGH6LGyjkcqKc4lc18gBea"
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwTWHfEQVFKMbZdkSFSMIcowhS",
+			"name": "Write File",
+			"title": "Write File (Inventory)",
+			"type": "terminal.write_file",
+			"base_type": "activity",
+			"properties": {
+				"action_timeout": 180,
+				"content": "$activity.definition_activity_1BwT1T8RjrLrEo6vH9AYGfTxUb8.output.variable_workflow_1Czv36eZtLIcghxVsu1ZeOPJtRg$",
+				"display_name": "Write File (Inventory)",
+				"encoding": "utf-8",
+				"file_name": "LabCorp/LC-inventory-$activity.definition_activity_1BwQxjulQQ9G5DZxNDD73f5h1AV.output.result_string$.json",
+				"options": "overwrite",
+				"runtime_user": {
+					"target_default": true
+				},
+				"target": {
+					"override_workflow_target": true,
+					"target_id": "definition_target_1BinkgRP0dVHaMOc59eqceuY3e8"
+				}
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1C4rWuI2Y20zF5slttcbCyE9Dni",
+			"name": "Condition Block",
+			"title": "SKIP Monster JSON Table",
+			"type": "logic.if_else",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "SKIP Monster JSON Table"
+			},
+			"object_type": "definition_activity",
+			"blocks": [{
+				"unique_name": "definition_activity_1C4rX3r8nnMGbPULPdT607WaK9g",
+				"name": "Condition Branch",
+				"title": "true",
+				"type": "logic.condition_block",
+				"base_type": "activity",
+				"properties": {
+					"condition": {
+						"left_operand": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzoNxOidguqivXlMTi6EAT5y$",
+						"operator": "eq",
+						"right_operand": true
+					},
+					"display_name": "true"
+				},
+				"object_type": "definition_activity",
+				"actions": [{
+					"unique_name": "definition_activity_1C4rMVUw1PBAm0hbtPNsCkSShSN",
+					"name": "Write File",
+					"title": "Write File (Inventory)",
+					"type": "terminal.write_file",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"content": "$activity.definition_activity_1BwT1T8RjrLrEo6vH9AYGfTxUb8.output.variable_workflow_1Czv36eZtLIcghxVsu1ZeOPJtRg$",
+						"display_name": "Write File (Inventory)",
+						"encoding": "utf-8",
+						"file_name": "/u01/app/oracle/oradata/lobs/LC-inventory-$activity.definition_activity_1BwQxjulQQ9G5DZxNDD73f5h1AV.output.result_string$.json",
+						"options": "overwrite",
+						"runtime_user": {
+							"target_default": true
+						},
+						"target": {
+							"override_workflow_target": true,
+							"target_id": "definition_target_1C4rFpC32eow6I5XQAN9zWBR7Xm"
+						}
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1C5FCCR3Rj1r4x3SodzPldxW7SX",
+					"name": "Write File",
+					"title": "Write File (importjson.sql)",
+					"type": "terminal.write_file",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"content": "drop table lc_inventory_json;\ncreate table lc_inventory_json ( my_json clob, constraint inv_chk check ( my_json IS JSON) );\ncommit;\ndeclare\n\tjsonfile bfile := bfilename('LOBDIR','LC-inventory-20181019-1110.json');\n    c clob;\nbegin\n    dbms_lob.open(jsonfile);\n    dbms_lob.createtemporary(c,true);\n    dbms_lob.loadfromfile(c,jsonfile,dbms_lob.getlength(jsonfile) );\n    insert into lc_inventory_json values(c);\n    commit;\n    dbms_lob.close(jsonfile);\n    dbms_lob.freetemporary(c);\nend;\n/",
+						"display_name": "Write File (importjson.sql)",
+						"encoding": "utf-8",
+						"file_name": "/u01/app/oracle/oradata/lobs/importjson.sql",
+						"options": "overwrite",
+						"runtime_user": {
+							"target_default": true
+						},
+						"target": {
+							"override_workflow_target": true,
+							"target_id": "definition_target_1C4rFpC32eow6I5XQAN9zWBR7Xm"
+						}
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1C4vZbINmtAZwzCyueg8bfhpzfp",
+					"name": "Execute Terminal Command(s)",
+					"title": "Execute Terminal Command(s)",
+					"type": "terminal.command",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"command_timeout": 20,
+						"commands": "sqlplus / as sysdba\n@/u01/app/oracle/oradata/lobs/importjson.sql;\nexit",
+						"display_name": "Execute Terminal Command(s)",
+						"merge_commands": true,
+						"runtime_user": {
+							"target_default": true
+						},
+						"target": {
+							"override_workflow_target": true,
+							"target_id": "definition_target_1C4vWWvKBgxjF7SYyqQqr0yNJZE"
+						}
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1C5FQczb9RieKGLUWKL51NfCGka",
+					"name": "Select from Table via JDBC",
+					"title": "Select from Table via JDBC",
+					"type": "corejava.select_from_via_jdbc",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"description": "Get only the Meraki MR32 \u0026 MR33 wireless APs",
+						"display_name": "Select from Table via JDBC",
+						"persist_output": true,
+						"populate_columns": false,
+						"row_count": 100,
+						"runtime_user": {
+							"target_default": true
+						},
+						"sql_query": "SELECT MAC, SERIAL, NAME, MODEL, NETWORKID, PUBLICIP\nFROM   sys.lc_inventory_json,\n    JSON_TABLE(my_json, '$[*]'\n    COLUMNS (\n           \"MAC\" \t\tPATH '$.mac',\n           \"NAME\" \t\tPATH '$.name',\n           \"MODEL\"       PATH '$.model',\n           \"NETWORKID\" \tPATH '$.networkId',\n           \"PUBLICIP\"\tPATH '$.publicIp',\n           \"SERIAL\" \tPATH '$.serial')\n      )\nWHERE MODEL LIKE 'MR3%'",
+						"table_columns": [{
+							"column_name": "MAC",
+							"column_type": "string"
+						}, {
+							"column_name": "SERIAL",
+							"column_type": "string"
+						}, {
+							"column_name": "NAME",
+							"column_type": "string"
+						}, {
+							"column_name": "MODEL",
+							"column_type": "string"
+						}, {
+							"column_name": "NETWORKID",
+							"column_type": "string"
+						}, {
+							"column_name": "PUBLICIP",
+							"column_type": "string"
+						}],
+						"target": {
+							"override_workflow_target": true,
+							"target_id": "definition_target_1C2D3b8yhFnf3n0OI4f03FADJqL"
+						}
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J",
+					"name": "For Each",
+					"title": "For Each",
+					"type": "logic.for_each",
+					"base_type": "activity",
+					"properties": {
+						"display_name": "For Each",
+						"source_array": "$activity.definition_activity_1C5FQczb9RieKGLUWKL51NfCGka.output.select_from_via_jdbc$"
+					},
+					"object_type": "definition_activity",
+					"actions": [{
+						"unique_name": "definition_activity_1CGJsFFCB0nDRgZtRF19aSpAeX3",
+						"name": "HTTP Request",
+						"title": "HTTP Request",
+						"type": "web-service.http_request",
+						"base_type": "activity",
+						"properties": {
+							"action_timeout": 180,
+							"allow_auto_redirect": true,
+							"content_type": "application/json",
+							"continue_on_error_status_code": true,
+							"custom_headers": [{
+								"name": "X-Cisco-Meraki-API-Key",
+								"value": "$global.variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z.global.variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z$"
+							}],
+							"display_name": "HTTP Request",
+							"method": "GET",
+							"relative_url": "/api/v0/devices/$activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].SERIAL$/clients?timespan=86400 ",
+							"runtime_user": {
+								"target_default": true
+							},
+							"target": {
+								"override_workflow_target": true,
+								"target_id": "definition_target_1BwECdXELQF2LujxZYFRbNGaX2N"
+							}
+						},
+						"object_type": "definition_activity"
+					}, {
+						"unique_name": "definition_activity_1CFl4Bap4wNwwHNyKJ9fASNtwo1",
+						"name": "Set Variables",
+						"title": "Set Variables (1)",
+						"type": "core.set_multiple_variables",
+						"base_type": "activity",
+						"properties": {
+							"display_name": "Set Variables (1)",
+							"variables_to_update": [{
+								"variable_to_update": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzjvDMqW0rQQhwWkC6yzZa7z$",
+								"variable_value_new": "$activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].MAC$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].SERIAL$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].NAME$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].MODEL$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].NETWORKID$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].PUBLICIP$"
+							}]
+						},
+						"object_type": "definition_activity"
+					}]
+				}]
+			}, {
+				"unique_name": "definition_activity_1C4rWzpccTDEPWmUlnFPAbFp4Y7",
+				"name": "Condition Branch",
+				"title": "False",
+				"type": "logic.condition_block",
+				"base_type": "activity",
+				"properties": {
+					"condition": {
+						"left_operand": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzoNxOidguqivXlMTi6EAT5y$",
+						"operator": "eq",
+						"right_operand": false
+					},
+					"display_name": "False"
+				},
+				"object_type": "definition_activity",
+				"actions": [{
+					"unique_name": "definition_activity_1BwVIB5Mg3no1uZMAe4Qf9v9FL7",
+					"name": "Read Table from JSON",
+					"title": "Read Table from JSON (Inventory)",
+					"type": "corejava.read_table_from_json",
+					"base_type": "activity",
+					"properties": {
+						"display_name": "Read Table from JSON (Inventory)",
+						"input_json": "{ \"inventory\" :\n$activity.definition_activity_1BwT1T8RjrLrEo6vH9AYGfTxUb8.output.variable_workflow_1Czv36eZtLIcghxVsu1ZeOPJtRg$\n}",
+						"jsonpath_query": "$.inventory[*]",
+						"persist_output": true,
+						"populate_columns": false,
+						"table_columns": [{
+							"column_name": "mac",
+							"column_type": "string"
+						}, {
+							"column_name": "serial",
+							"column_type": "string"
+						}, {
+							"column_name": "networkId",
+							"column_type": "string"
+						}, {
+							"column_name": "model",
+							"column_type": "string"
+						}, {
+							"column_name": "claimedAt",
+							"column_type": "string"
+						}, {
+							"column_name": "publicIp",
+							"column_type": "string"
+						}, {
+							"column_name": "name",
+							"column_type": "string"
+						}]
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1BwXyAbfx7HTKKKC503ooBs4OyV",
+					"name": "Select from Table",
+					"title": "Select from Table",
+					"type": "core.selectfromtable",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"columns": [{
+							"column_name": "mac",
+							"column_type": "string"
+						}, {
+							"column_name": "serial",
+							"column_type": "string"
+						}, {
+							"column_name": "networkId",
+							"column_type": "string"
+						}, {
+							"column_name": "model",
+							"column_type": "string"
+						}, {
+							"column_name": "claimedAt",
+							"column_type": "string"
+						}, {
+							"column_name": "publicIp",
+							"column_type": "string"
+						}, {
+							"column_name": "name",
+							"column_type": "string"
+						}],
+						"display_name": "Select from Table",
+						"input_table": "$activity.definition_activity_1BwVIB5Mg3no1uZMAe4Qf9v9FL7.output.read_table_from_json$",
+						"number_of_rows": {
+							"all_rows": true
+						},
+						"persist_output": true,
+						"sorting": {
+							"no_sort": true
+						},
+						"where_clause": "model in ('MR32', 'MR33')"
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1C4sENYujfHTDN8EVvgMc4dn1O0",
+					"name": "Succeeded",
+					"title": "Completed",
+					"type": "logic.completed",
+					"base_type": "activity",
+					"properties": {
+						"completion_type": "succeeded",
+						"display_name": "Succeeded"
+					},
+					"object_type": "definition_activity"
+				}]
+			}]
+		}],
+		"categories": ["category_1BwO2BWpQnDA9CSA3d4Gd3IZsL9"]
+	},
+	"workflow2": {
+		"unique_name": "definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74",
+		"name": "Phase 1 Device Discovery1",
+		"title": "Phase 1 Device Discovery1",
+		"type": "generic.workflow",
+		"base_type": "workflow",
+		"variables": [{
+			"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+			"properties": {
+				"value": "650207196201615741",
+				"scope": "input",
+				"name": "Input.OrganizationId",
+				"type": "datatype.string"
+			},
+			"unique_name": "variable_workflow_1CzuzoTrQTmfu3VwdeHICzQNTUB",
+			"object_type": ""
+		}, {
+			"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+			"properties": {
+				"value": "",
+				"scope": "local",
+				"name": "BogusPlaceholder",
+				"type": "datatype.string",
+				"description": "Added so I would have a bogus activity to generate a date/time from for later Format Date activity"
+			},
+			"unique_name": "variable_workflow_1Czuzmbf4opqXEL0kjYIT4vy1l7",
+			"object_type": ""
+		}, {
+			"schema_id": "1BhhrGuEw3FyD0gTpPgmbQzPmys",
+			"properties": {
+				"value": false,
+				"scope": "local",
+				"name": "Skip",
+				"type": "datatype.boolean"
+			},
+			"unique_name": "variable_workflow_1CzuzoNxOidguqivXlMTi6EAT5y",
+			"object_type": ""
+		}, {
+			"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+			"properties": {
+				"value": "",
+				"scope": "local",
+				"name": "retrievedmac",
+				"type": "datatype.string"
+			},
+			"unique_name": "variable_workflow_1CzuzjvDMqW0rQQhwWkC6yzZa7z",
+			"object_type": ""
+		}, {
+			"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+			"properties": {
+				"value": "",
+				"scope": "local",
+				"name": "Empty String",
+				"type": "datatype.string"
+			},
+			"unique_name": "variable_workflow_1CzuzjKhXipTEBkZwcnbluG1Inl",
+			"object_type": ""
+		}],
+		"properties": {
+			"delete_workflow_instance": false,
+			"display_name": "Phase 1 Device Discovery1",
+			"target": {
+				"no_target": true
+			}
+		},
+		"object_type": "definition_workflow",
+		"actions": [{
+			"unique_name": "definition_activity_1BwQiV3O38E6MYBeA8FKn3H1Z3g",
+			"name": "Set Variables",
+			"title": "Set Variables1",
+			"type": "core.set_multiple_variables",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "Set Variables1",
+				"variables_to_update": [{
+					"variable_to_update": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1Czuzmbf4opqXEL0kjYIT4vy1l7$",
+					"variable_value_new": " "
+				}]
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwQXzd6YBCAZvbJNswIKX0mPNJ",
+			"name": "Format Date",
+			"title": "Format Date",
+			"type": "core.format_date",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "Format Date",
+				"format_string": "2006-01-02T15:04:05Z",
+				"original_date": "$activity.definition_activity_1BwQiV3O38E6MYBeA8FKn3H1Z3g.output.start_time$"
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwQxjulQQ9G5DZxNDD73f5h1AV",
+			"name": "Replace String",
+			"title": "Replace String",
+			"type": "core.replacestring",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "Replace String",
+				"input_string": "$activity.definition_activity_1BwQXzd6YBCAZvbJNswIKX0mPNJ.output.result$",
+				"replace_list": [{
+					"replaced_string": "-",
+					"replacement_string": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzjKhXipTEBkZwcnbluG1Inl$"
+				}, {
+					"replaced_string": "T",
+					"replacement_string": "-"
+				}, {
+					"replaced_string": "Z",
+					"replacement_string": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzjKhXipTEBkZwcnbluG1Inl$"
+				}, {
+					"replaced_string": ":",
+					"replacement_string": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzjKhXipTEBkZwcnbluG1Inl$"
+				}]
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwO6fI97f5gFNB5nK7HUBtpAhc",
+			"name": "Meraki - Get Networks",
+			"title": "Meraki - Get Networks",
+			"type": "workflow.sub_workflow",
+			"base_type": "subworkflow",
+			"properties": {
+				"display_name": "Meraki - Get Networks",
+				"input": {
+					"variable_workflow_1Czv2cuuWFPPwLqowLYy8IrVdoa": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.input.variable_workflow_1CzuzoTrQTmfu3VwdeHICzQNTUB$"
+				},
+				"target": {
+					"no_target": true
+				},
+				"workflow_id": "definition_workflow_1BwFlnSzMFVtiHTUgln9CAunCU1"
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwOgMi2nYX91IEapkmbciXC5EW",
+			"name": "Write File",
+			"title": "Write File (Networks)",
+			"type": "terminal.write_file",
+			"base_type": "activity",
+			"properties": {
+				"action_timeout": 180,
+				"content": "$activity.definition_activity_1BwO6fI97f5gFNB5nK7HUBtpAhc.output.variable_workflow_1Czv2ekPseDCb0GzoPTWcYj6eBX$",
+				"display_name": "Write File (Networks)",
+				"encoding": "utf-8",
+				"file_name": "LabCorp/LC-networks-$activity.definition_activity_1BwQxjulQQ9G5DZxNDD73f5h1AV.output.result_string$.json",
+				"options": "overwrite",
+				"runtime_user": {
+					"target_default": true
+				},
+				"target": {
+					"override_workflow_target": true,
+					"target_id": "definition_target_1BinkgRP0dVHaMOc59eqceuY3e8"
+				}
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwTzVLB0hVGFp3LqLJDrgtomPr",
+			"name": "Read Table from JSON",
+			"title": "Read Table from JSON (Networks)",
+			"type": "corejava.read_table_from_json",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "Read Table from JSON (Networks)",
+				"input_json": "{ \"networks\" :\n$activity.definition_activity_1BwO6fI97f5gFNB5nK7HUBtpAhc.output.variable_workflow_1Czv2ekPseDCb0GzoPTWcYj6eBX$\n}",
+				"jsonpath_query": "$.networks[*]",
+				"populate_columns": false,
+				"table_columns": [{
+					"column_name": "id",
+					"column_type": "string"
+				}, {
+					"column_name": "organizationId",
+					"column_type": "string"
+				}, {
+					"column_name": "name",
+					"column_type": "string"
+				}, {
+					"column_name": "timeZone",
+					"column_type": "string"
+				}, {
+					"column_name": "tags",
+					"column_type": "string"
+				}, {
+					"column_name": "type",
+					"column_type": "string"
+				}]
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwT1T8RjrLrEo6vH9AYGfTxUb8",
+			"name": "Meraki - Get Inventory",
+			"title": "Meraki - Get Inventory",
+			"type": "workflow.sub_workflow",
+			"base_type": "subworkflow",
+			"properties": {
+				"display_name": "Meraki - Get Inventory",
+				"input": {
+					"variable_workflow_1Czv3Cq7XS6VQCWCEx4vvXsgz59": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.input.variable_workflow_1CzuzoTrQTmfu3VwdeHICzQNTUB$"
+				},
+				"target": {
+					"no_target": true
+				},
+				"workflow_id": "definition_workflow_1BwGerGH6LGyjkcqKc4lc18gBea"
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1BwTWHfEQVFKMbZdkSFSMIcowhS",
+			"name": "Write File",
+			"title": "Write File (Inventory)",
+			"type": "terminal.write_file",
+			"base_type": "activity",
+			"properties": {
+				"action_timeout": 180,
+				"content": "$activity.definition_activity_1BwT1T8RjrLrEo6vH9AYGfTxUb8.output.variable_workflow_1Czv36eZtLIcghxVsu1ZeOPJtRg$",
+				"display_name": "Write File (Inventory)",
+				"encoding": "utf-8",
+				"file_name": "LabCorp/LC-inventory-$activity.definition_activity_1BwQxjulQQ9G5DZxNDD73f5h1AV.output.result_string$.json",
+				"options": "overwrite",
+				"runtime_user": {
+					"target_default": true
+				},
+				"target": {
+					"override_workflow_target": true,
+					"target_id": "definition_target_1BinkgRP0dVHaMOc59eqceuY3e8"
+				}
+			},
+			"object_type": "definition_activity"
+		}, {
+			"unique_name": "definition_activity_1C4rWuI2Y20zF5slttcbCyE9Dni",
+			"name": "Condition Block",
+			"title": "SKIP Monster JSON Table",
+			"type": "logic.if_else",
+			"base_type": "activity",
+			"properties": {
+				"display_name": "SKIP Monster JSON Table"
+			},
+			"object_type": "definition_activity",
+			"blocks": [{
+				"unique_name": "definition_activity_1C4rX3r8nnMGbPULPdT607WaK9g",
+				"name": "Condition Branch",
+				"title": "true",
+				"type": "logic.condition_block",
+				"base_type": "activity",
+				"properties": {
+					"condition": {
+						"left_operand": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzoNxOidguqivXlMTi6EAT5y$",
+						"operator": "eq",
+						"right_operand": true
+					},
+					"display_name": "true"
+				},
+				"object_type": "definition_activity",
+				"actions": [{
+					"unique_name": "definition_activity_1C4rMVUw1PBAm0hbtPNsCkSShSN",
+					"name": "Write File",
+					"title": "Write File (Inventory)",
+					"type": "terminal.write_file",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"content": "$activity.definition_activity_1BwT1T8RjrLrEo6vH9AYGfTxUb8.output.variable_workflow_1Czv36eZtLIcghxVsu1ZeOPJtRg$",
+						"display_name": "Write File (Inventory)",
+						"encoding": "utf-8",
+						"file_name": "/u01/app/oracle/oradata/lobs/LC-inventory-$activity.definition_activity_1BwQxjulQQ9G5DZxNDD73f5h1AV.output.result_string$.json",
+						"options": "overwrite",
+						"runtime_user": {
+							"target_default": true
+						},
+						"target": {
+							"override_workflow_target": true,
+							"target_id": "definition_target_1C4rFpC32eow6I5XQAN9zWBR7Xm"
+						}
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1C5FCCR3Rj1r4x3SodzPldxW7SX",
+					"name": "Write File",
+					"title": "Write File (importjson.sql)",
+					"type": "terminal.write_file",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"content": "drop table lc_inventory_json;\ncreate table lc_inventory_json ( my_json clob, constraint inv_chk check ( my_json IS JSON) );\ncommit;\ndeclare\n\tjsonfile bfile := bfilename('LOBDIR','LC-inventory-20181019-1110.json');\n    c clob;\nbegin\n    dbms_lob.open(jsonfile);\n    dbms_lob.createtemporary(c,true);\n    dbms_lob.loadfromfile(c,jsonfile,dbms_lob.getlength(jsonfile) );\n    insert into lc_inventory_json values(c);\n    commit;\n    dbms_lob.close(jsonfile);\n    dbms_lob.freetemporary(c);\nend;\n/",
+						"display_name": "Write File (importjson.sql)",
+						"encoding": "utf-8",
+						"file_name": "/u01/app/oracle/oradata/lobs/importjson.sql",
+						"options": "overwrite",
+						"runtime_user": {
+							"target_default": true
+						},
+						"target": {
+							"override_workflow_target": true,
+							"target_id": "definition_target_1C4rFpC32eow6I5XQAN9zWBR7Xm"
+						}
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1C4vZbINmtAZwzCyueg8bfhpzfp",
+					"name": "Execute Terminal Command(s)",
+					"title": "Execute Terminal Command(s)",
+					"type": "terminal.command",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"command_timeout": 20,
+						"commands": "sqlplus / as sysdba\n@/u01/app/oracle/oradata/lobs/importjson.sql;\nexit",
+						"display_name": "Execute Terminal Command(s)",
+						"merge_commands": true,
+						"runtime_user": {
+							"target_default": true
+						},
+						"target": {
+							"override_workflow_target": true,
+							"target_id": "definition_target_1C4vWWvKBgxjF7SYyqQqr0yNJZE"
+						}
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1C5FQczb9RieKGLUWKL51NfCGka",
+					"name": "Select from Table via JDBC",
+					"title": "Select from Table via JDBC",
+					"type": "corejava.select_from_via_jdbc",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"description": "Get only the Meraki MR32 \u0026 MR33 wireless APs",
+						"display_name": "Select from Table via JDBC",
+						"persist_output": true,
+						"populate_columns": false,
+						"row_count": 100,
+						"runtime_user": {
+							"target_default": true
+						},
+						"sql_query": "SELECT MAC, SERIAL, NAME, MODEL, NETWORKID, PUBLICIP\nFROM   sys.lc_inventory_json,\n    JSON_TABLE(my_json, '$[*]'\n    COLUMNS (\n           \"MAC\" \t\tPATH '$.mac',\n           \"NAME\" \t\tPATH '$.name',\n           \"MODEL\"       PATH '$.model',\n           \"NETWORKID\" \tPATH '$.networkId',\n           \"PUBLICIP\"\tPATH '$.publicIp',\n           \"SERIAL\" \tPATH '$.serial')\n      )\nWHERE MODEL LIKE 'MR3%'",
+						"table_columns": [{
+							"column_name": "MAC",
+							"column_type": "string"
+						}, {
+							"column_name": "SERIAL",
+							"column_type": "string"
+						}, {
+							"column_name": "NAME",
+							"column_type": "string"
+						}, {
+							"column_name": "MODEL",
+							"column_type": "string"
+						}, {
+							"column_name": "NETWORKID",
+							"column_type": "string"
+						}, {
+							"column_name": "PUBLICIP",
+							"column_type": "string"
+						}],
+						"target": {
+							"override_workflow_target": true,
+							"target_id": "definition_target_1C2D3b8yhFnf3n0OI4f03FADJqL"
+						}
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J",
+					"name": "For Each",
+					"title": "For Each",
+					"type": "logic.for_each",
+					"base_type": "activity",
+					"properties": {
+						"display_name": "For Each",
+						"source_array": "$activity.definition_activity_1C5FQczb9RieKGLUWKL51NfCGka.output.select_from_via_jdbc$"
+					},
+					"object_type": "definition_activity",
+					"actions": [{
+						"unique_name": "definition_activity_1CGJsFFCB0nDRgZtRF19aSpAeX3",
+						"name": "HTTP Request",
+						"title": "HTTP Request",
+						"type": "web-service.http_request",
+						"base_type": "activity",
+						"properties": {
+							"action_timeout": 180,
+							"allow_auto_redirect": true,
+							"content_type": "application/json",
+							"continue_on_error_status_code": true,
+							"custom_headers": [{
+								"name": "X-Cisco-Meraki-API-Key",
+								"value": "$global.variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z.global.variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z$"
+							}],
+							"display_name": "HTTP Request",
+							"method": "GET",
+							"relative_url": "/api/v0/devices/$activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].SERIAL$/clients?timespan=86400 ",
+							"runtime_user": {
+								"target_default": true
+							},
+							"target": {
+								"override_workflow_target": true,
+								"target_id": "definition_target_1BwECdXELQF2LujxZYFRbNGaX2N"
+							}
+						},
+						"object_type": "definition_activity"
+					}, {
+						"unique_name": "definition_activity_1CFl4Bap4wNwwHNyKJ9fASNtwo1",
+						"name": "Set Variables",
+						"title": "Set Variables (1)",
+						"type": "core.set_multiple_variables",
+						"base_type": "activity",
+						"properties": {
+							"display_name": "Set Variables (1)",
+							"variables_to_update": [{
+								"variable_to_update": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzjvDMqW0rQQhwWkC6yzZa7z$",
+								"variable_value_new": "$activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].MAC$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].SERIAL$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].NAME$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].MODEL$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].NETWORKID$ $activity.definition_activity_1CFjUN9vnovfgAdXKu9KIbvdO8J.input.source_array[@].PUBLICIP$"
+							}]
+						},
+						"object_type": "definition_activity"
+					}]
+				}]
+			}, {
+				"unique_name": "definition_activity_1C4rWzpccTDEPWmUlnFPAbFp4Y7",
+				"name": "Condition Branch",
+				"title": "False",
+				"type": "logic.condition_block",
+				"base_type": "activity",
+				"properties": {
+					"condition": {
+						"left_operand": "$workflow.definition_workflow_1BwNm1Q48bGZoqL31JWYvsK0p74.local.variable_workflow_1CzuzoNxOidguqivXlMTi6EAT5y$",
+						"operator": "eq",
+						"right_operand": false
+					},
+					"display_name": "False"
+				},
+				"object_type": "definition_activity",
+				"actions": [{
+					"unique_name": "definition_activity_1BwVIB5Mg3no1uZMAe4Qf9v9FL7",
+					"name": "Read Table from JSON",
+					"title": "Read Table from JSON (Inventory)",
+					"type": "corejava.read_table_from_json",
+					"base_type": "activity",
+					"properties": {
+						"display_name": "Read Table from JSON (Inventory)",
+						"input_json": "{ \"inventory\" :\n$activity.definition_activity_1BwT1T8RjrLrEo6vH9AYGfTxUb8.output.variable_workflow_1Czv36eZtLIcghxVsu1ZeOPJtRg$\n}",
+						"jsonpath_query": "$.inventory[*]",
+						"persist_output": true,
+						"populate_columns": false,
+						"table_columns": [{
+							"column_name": "mac",
+							"column_type": "string"
+						}, {
+							"column_name": "serial",
+							"column_type": "string"
+						}, {
+							"column_name": "networkId",
+							"column_type": "string"
+						}, {
+							"column_name": "model",
+							"column_type": "string"
+						}, {
+							"column_name": "claimedAt",
+							"column_type": "string"
+						}, {
+							"column_name": "publicIp",
+							"column_type": "string"
+						}, {
+							"column_name": "name",
+							"column_type": "string"
+						}]
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1BwXyAbfx7HTKKKC503ooBs4OyV",
+					"name": "Select from Table",
+					"title": "Select from Table",
+					"type": "core.selectfromtable",
+					"base_type": "activity",
+					"properties": {
+						"action_timeout": 180,
+						"columns": [{
+							"column_name": "mac",
+							"column_type": "string"
+						}, {
+							"column_name": "serial",
+							"column_type": "string"
+						}, {
+							"column_name": "networkId",
+							"column_type": "string"
+						}, {
+							"column_name": "model",
+							"column_type": "string"
+						}, {
+							"column_name": "claimedAt",
+							"column_type": "string"
+						}, {
+							"column_name": "publicIp",
+							"column_type": "string"
+						}, {
+							"column_name": "name",
+							"column_type": "string"
+						}],
+						"display_name": "Select from Table",
+						"input_table": "$activity.definition_activity_1BwVIB5Mg3no1uZMAe4Qf9v9FL7.output.read_table_from_json$",
+						"number_of_rows": {
+							"all_rows": true
+						},
+						"persist_output": true,
+						"sorting": {
+							"no_sort": true
+						},
+						"where_clause": "model in ('MR32', 'MR33')"
+					},
+					"object_type": "definition_activity"
+				}, {
+					"unique_name": "definition_activity_1C4sENYujfHTDN8EVvgMc4dn1O0",
+					"name": "Succeeded",
+					"title": "Completed",
+					"type": "logic.completed",
+					"base_type": "activity",
+					"properties": {
+						"completion_type": "succeeded",
+						"display_name": "Succeeded"
+					},
+					"object_type": "definition_activity"
+				}]
+			}]
+		}],
+		"categories": ["category_1BwO2BWpQnDA9CSA3d4Gd3IZsL9"]
+	},
+	"categories": {
+		"category_1BwO2BWpQnDA9CSA3d4Gd3IZsL9": {
+			"unique_name": "category_1BwO2BWpQnDA9CSA3d4Gd3IZsL9",
+			"name": "LabCorp",
+			"title": "LabCorp",
+			"type": "basic.category",
+			"base_type": "category",
+			"description": "Customer",
+			"category_type": "custom",
+			"object_type": "category"
+		}
+	},
+	"targets": {
+		"definition_target_1BinkgRP0dVHaMOc59eqceuY3e8": {
+			"unique_name": "definition_target_1BinkgRP0dVHaMOc59eqceuY3e8",
+			"name": "rtpnmlv-snmp",
+			"title": "rtpnmlv-snmp",
+			"type": "terminal.unix_linux_endpoint",
+			"base_type": "target",
+			"object_type": "definition_target",
+			"properties": {
+				"bash_shell": "/bin/bash",
+				"default_runtime_user_id": "definition_runtime_user_1BinfZztv0VUaF1Oe6oWeIUp1r8",
+				"display_name": "rtpnmlv-snmp",
+				"host": "as-rtp-rtpnmlv-snmp.cisco.com",
+				"port": 22
+			}
+		},
+		"definition_target_1BwECdXELQF2LujxZYFRbNGaX2N": {
+			"unique_name": "definition_target_1BwECdXELQF2LujxZYFRbNGaX2N",
+			"name": "Meraki API Server",
+			"title": "Meraki API Server",
+			"type": "web-service.endpoint",
+			"base_type": "target",
+			"object_type": "definition_target",
+			"properties": {
+				"disable_certificate_validation": true,
+				"display_name": "Meraki API Server",
+				"host": "api.meraki.com",
+				"ignore_certificate_errors": true,
+				"no_runtime_user": true,
+				"protocol": "https"
+			}
+		},
+		"definition_target_1C2D3b8yhFnf3n0OI4f03FADJqL": {
+			"unique_name": "definition_target_1C2D3b8yhFnf3n0OI4f03FADJqL",
+			"name": "rtpnmlv-oracle121",
+			"title": "rtpnmlv-oracle121",
+			"type": "corejava.jdbc_endpoint",
+			"base_type": "target",
+			"object_type": "definition_target",
+			"properties": {
+				"database": "orcl.cisco.com",
+				"dbtype": "oracle",
+				"default_runtime_user_id": "definition_runtime_user_1C2CnkqeVUrtETrn5XAleSoRK9C",
+				"description": "Oracle 12.1.0.2 EE server running on CentOS 7.5 in RTP Network Management Lab (CX/Services)",
+				"display_name": "rtpnmlv-oracle121",
+				"ignore_certificate_errors": true,
+				"port": 1521,
+				"server": "10.122.6.45"
+			}
+		},
+		"definition_target_1C4rFpC32eow6I5XQAN9zWBR7Xm": {
+			"unique_name": "definition_target_1C4rFpC32eow6I5XQAN9zWBR7Xm",
+			"name": "rtpnmlv-oracle121",
+			"title": "rtpnmlv-oracle121",
+			"type": "terminal.unix_linux_endpoint",
+			"base_type": "target",
+			"object_type": "definition_target",
+			"properties": {
+				"bash_shell": "/bin/bash",
+				"default_runtime_user_id": "definition_runtime_user_1C4r9bOkpYtY6wCgmtFhJIYuM27",
+				"display_name": "rtpnmlv-oracle121",
+				"host": "10.122.6.45",
+				"ignore_certificate_errors": true,
+				"port": 22
+			}
+		},
+		"definition_target_1C4vWWvKBgxjF7SYyqQqr0yNJZE": {
+			"unique_name": "definition_target_1C4vWWvKBgxjF7SYyqQqr0yNJZE",
+			"name": "rtpnmlv-oracle121",
+			"title": "rtpnmlv-oracle121",
+			"type": "terminal.endpoint",
+			"base_type": "target",
+			"object_type": "definition_target",
+			"properties": {
+				"default_runtime_user_id": "definition_runtime_user_1C4r9bOkpYtY6wCgmtFhJIYuM27",
+				"display_name": "rtpnmlv-oracle121",
+				"host": "10.122.6.45",
+				"ignore_certificate_errors": true,
+				"port": 22,
+				"prompt_pattern": "\\[oracle\\@rtpnmlv-oracle121 \\~\\]\\$",
+				"protocol": "ssh",
+				"succeeded_prompt_patterns": ["SQL\\\u003e"]
+			}
+		}
+	},
+	"runtime_users": {
+		"definition_runtime_user_1BinfZztv0VUaF1Oe6oWeIUp1r8": {
+			"unique_name": "definition_runtime_user_1BinfZztv0VUaF1Oe6oWeIUp1r8",
+			"name": "jadavis",
+			"title": "jadavis",
+			"type": "runtime_user.terminal_password_credentials",
+			"base_type": "runtime_user",
+			"object_type": "definition_runtime_user",
+			"properties": {
+				"display_name": "jadavis"
+			}
+		},
+		"definition_runtime_user_1C2CnkqeVUrtETrn5XAleSoRK9C": {
+			"unique_name": "definition_runtime_user_1C2CnkqeVUrtETrn5XAleSoRK9C",
+			"name": "Oracle (system)",
+			"title": "Oracle (system)",
+			"type": "runtime_user.database_credentials",
+			"base_type": "runtime_user",
+			"object_type": "definition_runtime_user",
+			"properties": {
+				"display_name": "Oracle (system)"
+			}
+		},
+		"definition_runtime_user_1C4r9bOkpYtY6wCgmtFhJIYuM27": {
+			"unique_name": "definition_runtime_user_1C4r9bOkpYtY6wCgmtFhJIYuM27",
+			"name": "oracle",
+			"title": "oracle",
+			"type": "runtime_user.terminal_password_credentials",
+			"base_type": "runtime_user",
+			"object_type": "definition_runtime_user",
+			"properties": {
+				"display_name": "oracle"
+			}
+		}
+	},
+	"variables": {
+		"variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z": {
+			"unique_name": "variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z",
+			"properties": {
+				"value": "",
+				"scope": "global",
+				"name": "LabCorp Meraki API Key",
+				"type": "datatype.secure_string",
+				"description": "Header X-Cisco-Meraki-API-Key for LabCorp POC"
+			},
+			"object_type": "variable"
+		}
+	},
+	"subworkflows": [{
+		"workflow": {
+			"unique_name": "definition_workflow_1BwGerGH6LGyjkcqKc4lc18gBea",
+			"name": "Meraki - Get Inventory",
+			"title": "Meraki - Get Inventory",
+			"type": "generic.workflow",
+			"base_type": "workflow",
+			"variables": [{
+				"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+				"properties": {
+					"value": "",
+					"scope": "output",
+					"name": "Output.JSON-Inventory",
+					"type": "datatype.string"
+				},
+				"unique_name": "variable_workflow_1Czv36eZtLIcghxVsu1ZeOPJtRg",
+				"object_type": ""
+			}, {
+				"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+				"properties": {
+					"value": "",
+					"scope": "input",
+					"name": "Input.OrganizationId",
+					"type": "datatype.string"
+				},
+				"unique_name": "variable_workflow_1Czv3Cq7XS6VQCWCEx4vvXsgz59",
+				"object_type": ""
+			}],
+			"properties": {
+				"delete_workflow_instance": false,
+				"display_name": "Meraki - Get Inventory",
+				"target": {
+					"no_target": true
+				}
+			},
+			"object_type": "definition_workflow",
+			"actions": [{
+				"unique_name": "definition_activity_1BwGq6TX89WHpBpCu1GSwa7GOtC",
+				"name": "HTTP Request",
+				"title": "HTTP Request (Inventory)",
+				"type": "web-service.http_request",
+				"base_type": "activity",
+				"properties": {
+					"action_timeout": 180,
+					"allow_auto_redirect": true,
+					"content_type": "application/json",
+					"continue_on_error_status_code": false,
+					"custom_headers": [{
+						"name": "X-Cisco-Meraki-API-Key",
+						"value": "$global.variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z.global.variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z$"
+					}],
+					"display_name": "HTTP Request (Inventory)",
+					"method": "GET",
+					"relative_url": "/api/v0/organizations/$workflow.definition_workflow_1BwGerGH6LGyjkcqKc4lc18gBea.input.variable_workflow_1Czv3Cq7XS6VQCWCEx4vvXsgz59$/inventory",
+					"runtime_user": {
+						"target_default": true
+					},
+					"target": {
+						"override_workflow_target": true,
+						"target_id": "definition_target_1BwECdXELQF2LujxZYFRbNGaX2N"
+					}
+				},
+				"object_type": "definition_activity"
+			}, {
+				"unique_name": "definition_activity_1BwGqgxRIhDO6jiVXcqyb8d2pPU",
+				"name": "Set Variables",
+				"title": "Set Variables",
+				"type": "core.set_multiple_variables",
+				"base_type": "activity",
+				"properties": {
+					"display_name": "Set Variables",
+					"variables_to_update": [{
+						"variable_to_update": "$workflow.definition_workflow_1BwGerGH6LGyjkcqKc4lc18gBea.output.variable_workflow_1Czv36eZtLIcghxVsu1ZeOPJtRg$",
+						"variable_value_new": "$activity.definition_activity_1BwGq6TX89WHpBpCu1GSwa7GOtC.output.response_body$"
+					}]
+				},
+				"object_type": "definition_activity"
+			}],
+			"categories": ["category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"]
+		}
+	}, {
+		"workflow": {
+			"unique_name": "definition_workflow_1BwFlnSzMFVtiHTUgln9CAunCU1",
+			"name": "Meraki - Get Networks",
+			"title": "Meraki - Get Networks",
+			"type": "generic.workflow",
+			"base_type": "workflow",
+			"variables": [{
+				"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+				"properties": {
+					"value": "",
+					"scope": "input",
+					"name": "OrganizationId",
+					"type": "datatype.string"
+				},
+				"unique_name": "variable_workflow_1Czv2cuuWFPPwLqowLYy8IrVdoa",
+				"object_type": ""
+			}, {
+				"schema_id": "1Bhhsw8ANQcolLJ1mMZ9s0JGvuN",
+				"properties": {
+					"value": "",
+					"scope": "output",
+					"name": "JSON-Networks",
+					"type": "datatype.string"
+				},
+				"unique_name": "variable_workflow_1Czv2ekPseDCb0GzoPTWcYj6eBX",
+				"object_type": ""
+			}],
+			"properties": {
+				"delete_workflow_instance": false,
+				"display_name": "Meraki - Get Networks",
+				"target": {
+					"no_target": true
+				}
+			},
+			"object_type": "definition_workflow",
+			"actions": [{
+				"unique_name": "definition_activity_1BwFq3wKZsHEWCFMXlqlbKIpruW",
+				"name": "HTTP Request",
+				"title": "HTTP Request",
+				"type": "web-service.http_request",
+				"base_type": "activity",
+				"properties": {
+					"action_timeout": 180,
+					"allow_auto_redirect": true,
+					"content_type": "application/json",
+					"continue_on_error_status_code": false,
+					"custom_headers": [{
+						"name": "X-Cisco-Meraki-API-Key",
+						"value": "$global.variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z.global.variable_1BwE1SuJTdZLfrFFNbcmaQkyv8z$"
+					}],
+					"display_name": "HTTP Request",
+					"method": "GET",
+					"relative_url": "/api/v0/organizations/$workflow.definition_workflow_1BwFlnSzMFVtiHTUgln9CAunCU1.input.variable_workflow_1Czv2cuuWFPPwLqowLYy8IrVdoa$/networks",
+					"runtime_user": {
+						"target_default": true
+					},
+					"target": {
+						"override_workflow_target": true,
+						"target_id": "definition_target_1BwECdXELQF2LujxZYFRbNGaX2N"
+					}
+				},
+				"object_type": "definition_activity"
+			}, {
+				"unique_name": "definition_activity_1BwGI5lC0XpxOadxPH4V9aKPKTs",
+				"name": "Set Variables",
+				"title": "Set Output (Networks JSON)",
+				"type": "core.set_multiple_variables",
+				"base_type": "activity",
+				"properties": {
+					"display_name": "Set Output (Networks JSON)",
+					"variables_to_update": [{
+						"variable_to_update": "$workflow.definition_workflow_1BwFlnSzMFVtiHTUgln9CAunCU1.output.variable_workflow_1Czv2ekPseDCb0GzoPTWcYj6eBX$",
+						"variable_value_new": "$activity.definition_activity_1BwFq3wKZsHEWCFMXlqlbKIpruW.output.response_body$"
+					}]
+				},
+				"object_type": "definition_activity"
+			}, {
+				"unique_name": "definition_activity_1CZjM7fzTXyimQIkFG9Wk1pCVXs",
+				"name": "Get Organizations",
+				"title": "Get Organizations",
+				"type": "meraki.get_organizations",
+				"base_type": "activity",
+				"properties": {
+					"action_timeout": 180,
+					"display_name": "Get Organizations",
+					"runtime_user": {
+						"target_default": true
+					}
+				},
+				"object_type": "definition_activity"
+			}, {
+				"unique_name": "definition_activity_1CZjPf86slgnCtbjWOHGtadh5aK",
+				"name": "For Each",
+				"title": "For Each",
+				"type": "logic.for_each",
+				"base_type": "activity",
+				"properties": {
+					"display_name": "For Each",
+					"source_array": "$activity.definition_activity_1CZjM7fzTXyimQIkFG9Wk1pCVXs.output.organizations$"
+				},
+				"object_type": "definition_activity",
+				"actions": [{
+					"unique_name": "definition_activity_1CZjRkLSoEoDwtfRdZJ9GOOof0E",
+					"name": "Condition Block",
+					"title": "Condition Block",
+					"type": "logic.if_else",
+					"base_type": "activity",
+					"properties": {
+						"display_name": "Condition Block"
+					},
+					"object_type": "definition_activity",
+					"blocks": [{
+						"unique_name": "definition_activity_1CZjRv4MdM904yN09EG5Wdn2Lc8",
+						"name": "Condition Branch",
+						"title": "Condition Branch",
+						"type": "logic.condition_block",
+						"base_type": "activity",
+						"properties": {
+							"condition": {
+								"left_operand": "",
+								"operator": "eq",
+								"right_operand": ""
+							},
+							"display_name": "Condition Branch"
+						},
+						"object_type": "definition_activity"
+					}]
+				}]
+			}],
+			"categories": ["category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"]
+		}
+	}]
+}
