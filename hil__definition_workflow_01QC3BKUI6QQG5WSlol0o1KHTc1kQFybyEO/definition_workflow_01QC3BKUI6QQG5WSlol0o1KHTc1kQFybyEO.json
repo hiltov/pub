@@ -1,0 +1,57 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01QC3BKUI6QQG5WSlol0o1KHTc1kQFybyEO",
+    "name": "hil",
+    "title": "hil",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "hil",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01QC3BRQ8Q0Q4768RvXtDirXcBBLcEBuqRd",
+        "name": "Sleep",
+        "title": "Sleep",
+        "type": "core.sleep",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Sleep",
+          "skip_execution": true,
+          "sleep_interval": 1
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "runtime_users": {
+    "definition_runtime_user_01QCVR1JNS7CH1Seo8AOgd9zKP10sUmNGnT": {
+      "unique_name": "definition_runtime_user_01QCVR1JNS7CH1Seo8AOgd9zKP10sUmNGnT",
+      "name": "hil token",
+      "title": "hil token",
+      "type": "runtime_user.git_token_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "hil token",
+        "token": "*****"
+      }
+    }
+  }
+}
