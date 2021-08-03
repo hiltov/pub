@@ -30,7 +30,7 @@
         "properties": {
           "continue_on_failure": false,
           "display_name": "Sleep",
-          "skip_execution": true,
+          "skip_execution": false,
           "sleep_interval": 1
         },
         "object_type": "definition_activity"
